@@ -1,0 +1,1 @@
+web: cd air & npm start
