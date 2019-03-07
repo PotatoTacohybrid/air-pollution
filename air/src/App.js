@@ -18,6 +18,7 @@ class App extends Component {
     this.handleCityChange = this.handleCityChange.bind(this)
     this.handleStateChange = this.handleStateChange.bind(this)
     this.getData = this.getData.bind(this)
+    this.renderResults = this.renderResults.bind(this)
   }
 
   handleCityChange(event) {
@@ -99,7 +100,12 @@ class App extends Component {
     })
   }
 
-  
+  renderResults(data) {
+    if (data) {
+      return (<div className="results">{data}</div>)
+    }
+  }
+
 
   render() {
     return (
@@ -133,11 +139,7 @@ class App extends Component {
 
           <button onClick={this.getData}>Get Info</button>
 
-          {() => {
-            if (this.state.info) {
-              return (<div className="results">{this.state.info}</div>)
-            }
-          }}
+          {this.renderResults(this.state.info)}
       </div>
     );
   }
