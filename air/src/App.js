@@ -63,6 +63,7 @@ class App extends Component {
 
   async getData() {
 
+
     if (!this.state.cityInput || !this.state.stateInput) {
       return false;
     }
@@ -74,6 +75,9 @@ class App extends Component {
 
       return false;
     }
+
+    this.setState({info: ''})
+    this.forceUpdate()
 
     const res = await fetch(`https://api.airvisual.com/v2/city?city=${this.state.cityInput}&state=${this.state.stateInput}&country=USA&key=CPaiW6P6xGxFyrP3D`)
 
@@ -90,9 +94,15 @@ class App extends Component {
     const aqius = data.data.current.pollution.aqius;
 
     this.setState({
-      info: `The air quality of ${data.data.city} is ${aqius}`,
+      info: `The aqius of ${data.data.city} is ${aqius}`,
       aqius: aqius
     })
+  }
+
+  renderResults(data) {
+    if (data) {
+      return (<div className="results">{data}</div>)
+    }
   }
 
 
@@ -128,9 +138,7 @@ class App extends Component {
 
           <button onClick={this.getData}>Get Info</button>
 
-          <div className="results">
-            <div>{this.state.info}</div>
-          </div>
+          {this.renderResults(this.state.info)}
       </div>
     );
   }
