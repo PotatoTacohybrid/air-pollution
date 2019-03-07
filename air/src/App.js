@@ -99,12 +99,7 @@ class App extends Component {
     })
   }
 
-  renderResults(data) {
-    if (data) {
-      return (<div className="results">{data}</div>)
-    }
-  }
-
+  
 
   render() {
     return (
@@ -138,7 +133,11 @@ class App extends Component {
 
           <button onClick={this.getData}>Get Info</button>
 
-          {this.renderResults(this.state.info)}
+          {() => {
+            if (this.state.info) {
+              return (<div className="results">{this.state.info}</div>)
+            }
+          }}
       </div>
     );
   }
